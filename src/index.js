@@ -82,6 +82,12 @@ class Game extends React.Component {
     });
   }
 
+  getCoordinates(i, width = 3) {
+    const col = i % width;
+    const row = Math.floor(i / width);
+    return "(" + col + ", " + row + ")";
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -89,7 +95,7 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move
-        ? "Go to move #" + move + " " + step.updatedSquare
+        ? "Go to move #" + move + " " + this.getCoordinates(step.updatedSquare)
         : "Go to game start";
 
       return (

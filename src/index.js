@@ -4,10 +4,10 @@ import "./index.css";
 
 class Square extends React.Component {
   render() {
-    const { value, clickFunc } = this.props;
+    const { value, onClick } = this.props;
 
     return (
-      <button className="square" onClick={clickFunc}>
+      <button className="square" onClick={onClick}>
         {value}
       </button>
     );
@@ -26,7 +26,7 @@ class Board extends React.Component {
     return (
       <Square
         value={this.state.squares[i]}
-        clickFunc={() => this.handleClick(i)}
+        onClick={() => this.handleClick(i)}
       />
     );
   }

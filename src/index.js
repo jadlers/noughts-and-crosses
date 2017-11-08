@@ -98,9 +98,13 @@ class Game extends React.Component {
         ? "Go to move #" + move + " " + this.getCoordinates(step.updatedSquare)
         : "Go to game start";
 
+      const lookedAt = move === this.state.stepNumber ? "bold" : "";
+
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className={lookedAt} onClick={() => this.jumpTo(move)}>
+            {desc}
+          </button>
         </li>
       );
     });

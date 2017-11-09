@@ -5,11 +5,11 @@ import "./index.css";
 /* TODO: 1. Add a toggle button that lets you sort the moves in either ascending
 or descending order. */
 
-function Square(props) {
-  const classes = props.win ? "square winning" : "square";
+function Square({ win, onClick, value }) {
+  const classes = win ? "square winning" : "square";
   return (
-    <button className={classes} onClick={props.onClick}>
-      {props.value}
+    <button className={classes} onClick={onClick}>
+      {value}
     </button>
   );
 }

@@ -53,3 +53,7 @@ ul {
 .bold {
   font-weight: bold;
 }
+
+.winning {
+  background: rgb(133, 255, 133);
+}

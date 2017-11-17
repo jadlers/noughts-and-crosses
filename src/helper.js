@@ -16,9 +16,18 @@ function validHorizontal(squares, columns = 3) {
     const rowStart = Math.floor(i / columns);
     const rowEnd = Math.floor((i + 2) / columns);
     if (rowStart === rowEnd) {
-      validRows.push([i, i + 1, i + 2]);
+      validRows.push(i);
     }
   }
-  console.log(validRows);
-  return validRows;
+
+  return validRows.map(horizontalSequence);
+}
+
+function horizontalSequence(start) {
+  const seqLength = 3;
+  let res = [];
+  for (let i = start; i < start + seqLength; i++) {
+    res.push(i);
+  }
+  return res;
 }

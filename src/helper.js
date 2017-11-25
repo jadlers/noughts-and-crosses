@@ -1,11 +1,13 @@
 export function calculateWinner(squares) {
-  let lines = validHorizontal(squares);
-  validVertical(squares).forEach(element => {
-    lines.push(element);
-  });
-  validDiagonal(squares).forEach(line => {
-    lines.push(line);
-  });
+  const horizontalStart = validHorizontalStart(squares);
+  const verticalStart = validVerticalStart(squares);
+  const union = horizontalStart.filter(x => verticalStart.includes(x));
+
+  let lines = [];
+
+  horizontalStart.map(i => lines.push(horizontalSequence(i)));
+  verticalStart.map(i => lines.push(verticalSequence(i)));
+
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
@@ -15,7 +17,7 @@ export function calculateWinner(squares) {
   return null;
 }
 
-function validHorizontal(squares, columns = 3) {
+function validHorizontalStart(squares, columns = 3) {
   const numSquares = squares.length;
   let validRows = [];
   for (let i = 0; i < numSquares; i++) {
@@ -26,7 +28,21 @@ function validHorizontal(squares, columns = 3) {
     }
   }
 
-  return validRows.map(horizontalSequence);
+  return validRows;
+}
+
+function validVerticalStart(squares, columns = 3) {
+  const seqLength = 3;
+  const numSquares = squares.length;
+  let validRows = [];
+  for (let i = 0; i < numSquares; i++) {
+    const lastSquare = i + (seqLength - 1) * columns;
+    if (lastSquare < numSquares) {
+      validRows.push(i);
+    }
+  }
+
+  return validRows;
 }
 
 function horizontalSequence(start) {
@@ -38,20 +54,6 @@ function horizontalSequence(start) {
   return res;
 }
 
-function validVertical(squares, columns = 3) {
-  const seqLength = 3;
-  const numSquares = squares.length;
-  let validRows = [];
-  for (let i = 0; i < numSquares; i++) {
-    const lastSquare = i + (seqLength - 1) * columns;
-    if (lastSquare < numSquares) {
-      validRows.push(i);
-    }
-  }
-
-  return validRows.map(verticalSequence);
-}
-
 function verticalSequence(start) {
   const seqLength = 3;
   const rowLength = 3;
@@ -59,26 +61,6 @@ function verticalSequence(start) {
   for (let i = start; i < start + seqLength * rowLength; i += rowLength) {
     res.push(i);
   }
-  return res;
-}
-
-function validDiagonal(squares, columns = 3) {
-  let res = [];
-
-  // Slash
-  for (let i = 0; i < squares.length; i++) {
-    if (false) {
-      res.push(slashSequence(i));
-    }
-  }
-
-  // Backslash
-  for (let i = 0; i < squares.length; i++) {
-    if (false) {
-      res.push(backSlashSequence(i));
-    }
-  }
-
   return res;
 }
 

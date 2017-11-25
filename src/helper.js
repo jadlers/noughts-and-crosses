@@ -1,3 +1,9 @@
+const settings = {
+  ROWS: 3,
+  COLUMNS: 3,
+  SEQ_LEN: 3
+};
+
 export function calculateWinner(squares) {
   const lines = getValidSequences(squares);
 
@@ -15,25 +21,25 @@ function getValidSequences(squares) {
   const verticalStart = validVerticalStart(squares);
   const union = horizontalStart.filter(x => verticalStart.includes(x));
 
-  const columns = 3; // TODO: Store in a game settings singleton
   let lines = [];
 
   horizontalStart.map(i => lines.push(horizontalSequence(i)));
   verticalStart.map(i => lines.push(verticalSequence(i)));
   union.map(i => {
-    lines.push(slashSequence(i + columns - 1));
+    lines.push(slashSequence(i + settings.COLUMNS - 1));
     lines.push(backSlashSequence(i));
   });
 
   return lines;
 }
 
-function validHorizontalStart(squares, columns = 3) {
-  const numSquares = squares.length;
+function validHorizontalStart(squares) {
+  const { COLUMNS } = settings;
   let validRows = [];
-  for (let i = 0; i < numSquares; i++) {
-    const rowStart = Math.floor(i / columns);
-    const rowEnd = Math.floor((i + 2) / columns);
+
+  for (let i = 0; i < squares.length; i++) {
+    const rowStart = Math.floor(i / COLUMNS);
+    const rowEnd = Math.floor((i + 2) / COLUMNS);
     if (rowStart === rowEnd) {
       validRows.push(i);
     }
@@ -42,13 +48,13 @@ function validHorizontalStart(squares, columns = 3) {
   return validRows;
 }
 
-function validVerticalStart(squares, columns = 3) {
-  const seqLength = 3;
-  const numSquares = squares.length;
+function validVerticalStart(squares) {
+  const { COLUMNS, SEQ_LEN } = settings;
   let validRows = [];
-  for (let i = 0; i < numSquares; i++) {
-    const lastSquare = i + (seqLength - 1) * columns;
-    if (lastSquare < numSquares) {
+
+  for (let i = 0; i < squares.length; i++) {
+    const lastSquare = i + (SEQ_LEN - 1) * COLUMNS;
+    if (lastSquare < squares.length) {
       validRows.push(i);
     }
   }
@@ -57,42 +63,47 @@ function validVerticalStart(squares, columns = 3) {
 }
 
 function horizontalSequence(start) {
-  const seqLength = 3;
+  const { SEQ_LEN } = settings;
   let res = [];
-  for (let i = start; i < start + seqLength; i++) {
+
+  for (let i = start; i < start + SEQ_LEN; i++) {
     res.push(i);
   }
+
   return res;
 }
 
 function verticalSequence(start) {
-  const seqLength = 3;
-  const rowLength = 3;
+  const { SEQ_LEN, ROWS } = settings;
   let res = [];
-  for (let i = start; i < start + seqLength * rowLength; i += rowLength) {
+
+  for (let i = start; i < start + SEQ_LEN * ROWS; i += ROWS) {
     res.push(i);
   }
+
   return res;
 }
 
 function backSlashSequence(start) {
-  const seqLength = 3;
-  const rowLength = 3;
-  const lastIndex = start + (rowLength + 1) * (seqLength - 1);
+  const { SEQ_LEN, ROWS } = settings;
+  const lastIndex = start + (ROWS + 1) * (SEQ_LEN - 1);
   let res = [];
-  for (let i = start; i <= lastIndex; i += rowLength + 1) {
+
+  for (let i = start; i <= lastIndex; i += ROWS + 1) {
     res.push(i);
   }
+
   return res;
 }
 
 function slashSequence(start) {
-  const seqLength = 3;
-  const rowLength = 3;
-  const lastIndex = start + (rowLength - 1) * (seqLength - 1);
+  const { SEQ_LEN, ROWS } = settings;
+  const lastIndex = start + (ROWS - 1) * (SEQ_LEN - 1);
   let res = [];
-  for (let i = start; i <= lastIndex; i += rowLength - 1) {
+
+  for (let i = start; i <= lastIndex; i += ROWS - 1) {
     res.push(i);
   }
+
   return res;
 }

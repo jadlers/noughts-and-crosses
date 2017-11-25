@@ -1,4 +1,16 @@
 export function calculateWinner(squares) {
+  const lines = getValidSequences(squares);
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return [a, b, c];
+    }
+  }
+  return null;
+}
+
+function getValidSequences(squares) {
   const horizontalStart = validHorizontalStart(squares);
   const verticalStart = validVerticalStart(squares);
   const union = horizontalStart.filter(x => verticalStart.includes(x));
@@ -13,13 +25,7 @@ export function calculateWinner(squares) {
     lines.push(backSlashSequence(i));
   });
 
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return [a, b, c];
-    }
-  }
-  return null;
+  return lines;
 }
 
 function validHorizontalStart(squares, columns = 3) {

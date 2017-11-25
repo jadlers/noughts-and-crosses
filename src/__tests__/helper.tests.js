@@ -1,12 +1,12 @@
 import { calculateWinner } from "../helper";
 
-describe("Calculate winner", () => {
-  it("no winner", () => {
+describe("Winner (3x3 seq=3)", () => {
+  it("has no winner", () => {
     const noWinner = ["X", "X", "O", "O", "X", "X", "X", "O", "O"];
     expect(calculateWinner(noWinner)).toEqual(null);
   });
 
-  it("correct horizontal wins", () => {
+  it("finds horizontal wins correctly", () => {
     const topRowWinner = ["X", "X", "X", "O", null, "O", null, null, null];
     const middleRowWinner = ["X", "O", "X", "O", "O", "O", "X", "X", "X"];
     const bottomRowWinner = ["X", null, null, "X", "X", null, "O", "O", "O"];
@@ -15,7 +15,7 @@ describe("Calculate winner", () => {
     expect(calculateWinner(bottomRowWinner)).toEqual([6, 7, 8]);
   });
 
-  it("correct vertical wins", () => {
+  it("finds vertical wins correctly", () => {
     const leftColWinner = ["O", "O", "X", "O", "X", "X", "O", "X", null];
     const middleColWinner = [null, "X", null, "O", "X", "O", null, "X", null];
     const rightColWinner = ["O", "O", "X", null, null, "X", null, null, "X"];
@@ -24,19 +24,10 @@ describe("Calculate winner", () => {
     expect(calculateWinner(rightColWinner)).toEqual([2, 5, 8]);
   });
 
-  it("diagonal wins", () => {
+  it("finds diagonal wins correctly", () => {
     const upLeft2downRight = ["X", null, "O", null, "X", "O", null, null, "X"];
     const downLeft2upRight = ["X", "X", "O", null, "O", null, "O", null, "X"];
     expect(calculateWinner(upLeft2downRight)).toEqual([0, 4, 8]);
     expect(calculateWinner(downLeft2upRight)).toEqual([2, 4, 6]);
   });
-
-  /**
-   * [
-   *   "O", "X", "O",
-   *   "O", "X", "X",
-   *   "O", "O", "O"
-   * ];
-   *
-   */
 });

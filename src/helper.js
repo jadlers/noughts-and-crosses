@@ -3,10 +3,15 @@ export function calculateWinner(squares) {
   const verticalStart = validVerticalStart(squares);
   const union = horizontalStart.filter(x => verticalStart.includes(x));
 
+  const columns = 3; // TODO: Store in a game settings singleton
   let lines = [];
 
   horizontalStart.map(i => lines.push(horizontalSequence(i)));
   verticalStart.map(i => lines.push(verticalSequence(i)));
+  union.map(i => {
+    lines.push(slashSequence(i + columns - 1));
+    lines.push(backSlashSequence(i));
+  });
 
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];

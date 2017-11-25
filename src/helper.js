@@ -20,14 +20,22 @@ function getValidSequences(squares) {
   const horizontalStart = validHorizontalStart(squares);
   const verticalStart = validVerticalStart(squares);
   const union = horizontalStart.filter(x => verticalStart.includes(x));
+  const increments = {
+    HORIZONTAL: 1,
+    VERTICAL: settings.COLUMNS,
+    SLASH: settings.COLUMNS - 1,
+    BACKSLASH: settings.COLUMNS + 1
+  };
 
   let lines = [];
 
-  horizontalStart.map(i => lines.push(horizontalSequence(i)));
-  verticalStart.map(i => lines.push(verticalSequence(i)));
+  horizontalStart.map(i =>
+    lines.push(createSequence(i, increments.HORIZONTAL))
+  );
+  verticalStart.map(i => lines.push(createSequence(i, increments.VERTICAL)));
   union.map(i => {
-    lines.push(slashSequence(i + settings.COLUMNS - 1));
-    lines.push(backSlashSequence(i));
+    lines.push(createSequence(i + settings.COLUMNS - 1, increments.SLASH));
+    lines.push(createSequence(i, increments.BACKSLASH));
   });
 
   return lines;
@@ -62,48 +70,11 @@ function validVerticalStart(squares) {
   return validRows;
 }
 
-function horizontalSequence(start) {
-  const { SEQ_LEN } = settings;
-  let res = [];
-
-  for (let i = start; i < start + SEQ_LEN; i++) {
-    res.push(i);
+function createSequence(start, increment) {
+  let seq = [];
+  for (let i = 0; i < settings.SEQ_LEN; i++) {
+    const index = start + i * increment;
+    seq.push(index);
   }
-
-  return res;
-}
-
-function verticalSequence(start) {
-  const { SEQ_LEN, ROWS } = settings;
-  let res = [];
-
-  for (let i = start; i < start + SEQ_LEN * ROWS; i += ROWS) {
-    res.push(i);
-  }
-
-  return res;
-}
-
-function backSlashSequence(start) {
-  const { SEQ_LEN, ROWS } = settings;
-  const lastIndex = start + (ROWS + 1) * (SEQ_LEN - 1);
-  let res = [];
-
-  for (let i = start; i <= lastIndex; i += ROWS + 1) {
-    res.push(i);
-  }
-
-  return res;
-}
-
-function slashSequence(start) {
-  const { SEQ_LEN, ROWS } = settings;
-  const lastIndex = start + (ROWS - 1) * (SEQ_LEN - 1);
-  let res = [];
-
-  for (let i = start; i <= lastIndex; i += ROWS - 1) {
-    res.push(i);
-  }
-
-  return res;
+  return seq;
 }

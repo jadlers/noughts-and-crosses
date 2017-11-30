@@ -1,10 +1,7 @@
-const settings = {
-  ROWS: 3,
-  COLUMNS: 3,
-  SEQ_LEN: 3
-};
+let settings;
 
-export function calculateWinner(squares) {
+export function calculateWinner(squares, boardConfig) {
+  settings = boardConfig;
   const lines = getValidSequences(squares);
 
   for (let i = 0; i < lines.length; i++) {

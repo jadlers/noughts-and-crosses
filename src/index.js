@@ -47,10 +47,10 @@ class Board extends React.Component {
   }
 
   render() {
-    const boardSize = 3;
+    const { settings } = this.props;
     const rows = [];
-    for (var i = 0; i < boardSize; i++) {
-      rows.push(this.createRow(i * boardSize, boardSize));
+    for (var i = 0; i < settings.rows; i++) {
+      rows.push(this.createRow(i * settings.rows, settings.columns));
     }
 
     return <div>{rows}</div>;
@@ -70,6 +70,11 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true
     };
+    this.settings = {
+      rows: 3,
+      columns: 3,
+      seq_len: 3
+    };
   }
 
   handleClick(i) {
@@ -77,7 +82,7 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const squares = current.squares.slice();
 
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares, this.settings) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
@@ -126,7 +131,7 @@ class Game extends React.Component {
       );
     });
 
-    const winner = calculateWinner(current.squares);
+    const winner = calculateWinner(current.squares, this.settings);
     let status;
     if (winner) {
       const winnerChar = current.squares[winner[0]];
@@ -141,6 +146,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             winnerIndices={winner}
+            settings={this.settings}
             onClick={i => this.handleClick(i)}
           />
         </div>

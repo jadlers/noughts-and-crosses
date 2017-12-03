@@ -60,20 +60,21 @@ class Board extends React.Component {
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    this.settings = {
+      rows: 5,
+      columns: 5,
+      seq_len: 3
+    };
+    const numSquares = this.settings.rows * this.settings.columns;
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null),
+          squares: Array(numSquares).fill(null),
           updatedSquare: null
         }
       ],
       stepNumber: 0,
       xIsNext: true
-    };
-    this.settings = {
-      rows: 3,
-      columns: 3,
-      seq_len: 3
     };
   }
 

@@ -37,3 +37,237 @@ describe("Winner (3x3 seq=3)", () => {
     expect(calculateWinner(downLeft2upRight, settings)).toEqual([2, 4, 6]);
   });
 });
+
+describe("With (5x5 seq=3)", () => {
+  const settings = {
+    ROWS: 5,
+    COLUMNS: 5,
+    SEQ_LEN: 3
+  };
+
+  it("has no winner", () => {
+    // prettier-ignore
+    const noWinner = [
+      "X","O","X","O","X",
+      "O","X","O","X","O",
+      "O","X","O","X","O",
+      "X","O","X","O","X",
+      "X","O","X","O","X"
+    ];
+    expect(calculateWinner(noWinner, settings)).toEqual(null);
+  });
+
+  it("finds horizontal wins correctly", () => {
+    // prettier-ignore
+    const topRowWinner = [
+      null, null, null, null, null,
+      "X", "X", "X", null, null,
+      null, "O", null, null, null,
+      null, null, null, "O", null,
+      null, null, null, null, null
+    ];
+    const middleRowWinner = [
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null,
+      "O",
+      "O",
+      "O",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null
+    ];
+    const bottomRowWinner = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "O",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "X",
+      "X",
+      "X",
+      null,
+      "O",
+      null,
+      null,
+      null
+    ];
+    expect(calculateWinner(topRowWinner, settings)).toEqual([5, 6, 7]);
+    expect(calculateWinner(middleRowWinner, settings)).toEqual([11, 12, 13]);
+    expect(calculateWinner(bottomRowWinner, settings)).toEqual([17, 18, 19]);
+  });
+
+  it("finds vertical wins correctly", () => {
+    const leftColWinner = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      "O",
+      null,
+      "X",
+      null,
+      "O",
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ];
+    const middleColWinner = [
+      null,
+      null,
+      null,
+      "O",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "O",
+      "X",
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null
+    ];
+    const rightColWinner = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "O",
+      "X",
+      null,
+      "X",
+      null,
+      "O",
+      null,
+      null,
+      null,
+      "X",
+      "O",
+      null,
+      null,
+      null,
+      null,
+      null
+    ];
+    expect(calculateWinner(leftColWinner, settings)).toEqual([5, 10, 15]);
+    expect(calculateWinner(middleColWinner, settings)).toEqual([12, 17, 22]);
+    expect(calculateWinner(rightColWinner, settings)).toEqual([9, 14, 19]);
+  });
+
+  it("finds diagonal wins correctly", () => {
+    const upLeft2downRight = [
+      "X",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      "O",
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "O",
+      null,
+      null,
+      null,
+      null
+    ];
+    const downLeft2upRight = [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      "X",
+      null,
+      null,
+      null,
+      "X",
+      "O",
+      "O",
+      null,
+      "X",
+      null,
+      "O",
+      null,
+      null,
+      null,
+      "O",
+      null,
+      null
+    ];
+    expect(calculateWinner(upLeft2downRight, settings)).toEqual([0, 6, 12]);
+    expect(calculateWinner(downLeft2upRight, settings)).toEqual([14, 18, 22]);
+  });
+});

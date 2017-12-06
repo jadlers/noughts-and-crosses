@@ -66,59 +66,21 @@ describe("With (5x5 seq=3)", () => {
       null, null, null, "O", null,
       null, null, null, null, null
     ];
+    // prettier-ignore
     const middleRowWinner = [
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null,
-      "X",
-      null,
-      null,
-      null,
-      null,
-      "O",
-      "O",
-      "O",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null,
-      null
+      null, null, null, "X", null,
+      null, "X", null, null, null,
+      null, "O", "O", "O", null,
+      null, null, null, null, null,
+      null, "X", null, null, null
     ];
+    // prettier-ignore
     const bottomRowWinner = [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "O",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "X",
-      "X",
-      "X",
-      null,
-      "O",
-      null,
-      null,
-      null
+      null, null, null, null, null,
+      null, "O", null, null, null,
+      null, null, null, null, null,
+      null, null, "X", "X", "X",
+      null, "O", null, null, null
     ];
     expect(calculateWinner(topRowWinner, settings)).toEqual([5, 6, 7]);
     expect(calculateWinner(middleRowWinner, settings)).toEqual([11, 12, 13]);
@@ -126,86 +88,29 @@ describe("With (5x5 seq=3)", () => {
   });
 
   it("finds vertical wins correctly", () => {
+    // prettier-ignore
     const leftColWinner = [
-      null,
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null,
-      "O",
-      null,
-      "X",
-      null,
-      "O",
-      null,
-      null,
-      "X",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      null, null, null, null, null,
+      "X", null, null, "O", null,
+      "X", null, "O", null, null,
+      "X", null, null, null, null,
+      null, null, null, null, null
     ];
+    // prettier-ignore
     const middleColWinner = [
-      null,
-      null,
-      null,
-      "O",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "O",
-      "X",
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null
+      null, null, null, "O", null,
+      null, null, null, null, null,
+      null, "O", "X", null, null,
+      null, null, "X", null, null,
+      null, null, "X", null, null
     ];
+    // prettier-ignore
     const rightColWinner = [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "O",
-      "X",
-      null,
-      "X",
-      null,
-      "O",
-      null,
-      null,
-      null,
-      "X",
-      "O",
-      null,
-      null,
-      null,
-      null,
-      null
+      null, null, null, null, null,
+      null, null, null, null, "O",
+      "X", null, "X", null, "O",
+      null, null, null, "X", "O",
+      null, null, null, null, null
     ];
     expect(calculateWinner(leftColWinner, settings)).toEqual([5, 10, 15]);
     expect(calculateWinner(middleColWinner, settings)).toEqual([12, 17, 22]);
@@ -213,59 +118,21 @@ describe("With (5x5 seq=3)", () => {
   });
 
   it("finds diagonal wins correctly", () => {
+    // prettier-ignore
     const upLeft2downRight = [
-      "X",
-      null,
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      null,
-      "O",
-      null,
-      null,
-      "X",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "O",
-      null,
-      null,
-      null,
-      null
+      "X", null, null, null, null,
+      null, "X", null, null, "O",
+      null, null, "X", null, null,
+      null, null, null, null, null,
+      "O", null, null, null, null
     ];
+    // prettier-ignore
     const downLeft2upRight = [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "X",
-      null,
-      "X",
-      null,
-      null,
-      null,
-      "X",
-      "O",
-      "O",
-      null,
-      "X",
-      null,
-      "O",
-      null,
-      null,
-      null,
-      "O",
-      null,
-      null
+      null, null, null, null, null,
+      null, "X", null, "X", null,
+      null, null, "X", "O", "O",
+      null, "X", null, "O", null,
+      null, null, "O", null, null
     ];
     expect(calculateWinner(upLeft2downRight, settings)).toEqual([0, 6, 12]);
     expect(calculateWinner(downLeft2upRight, settings)).toEqual([14, 18, 22]);

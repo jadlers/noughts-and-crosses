@@ -31,7 +31,7 @@ function getValidSequences(squares) {
   );
   verticalStart.map(i => lines.push(createSequence(i, increments.VERTICAL)));
   union.map(i => {
-    lines.push(createSequence(i + settings.columns - 1, increments.SLASH));
+    lines.push(createSequence(i + settings.seq_len - 1, increments.SLASH));
     lines.push(createSequence(i, increments.BACKSLASH));
   });
 

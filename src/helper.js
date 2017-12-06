@@ -19,9 +19,9 @@ function getValidSequences(squares) {
   const union = horizontalStart.filter(x => verticalStart.includes(x));
   const increments = {
     HORIZONTAL: 1,
-    VERTICAL: settings.COLUMNS,
-    SLASH: settings.COLUMNS - 1,
-    BACKSLASH: settings.COLUMNS + 1
+    VERTICAL: settings.columns,
+    SLASH: settings.columns - 1,
+    BACKSLASH: settings.columns + 1
   };
 
   let lines = [];
@@ -31,7 +31,7 @@ function getValidSequences(squares) {
   );
   verticalStart.map(i => lines.push(createSequence(i, increments.VERTICAL)));
   union.map(i => {
-    lines.push(createSequence(i + settings.COLUMNS - 1, increments.SLASH));
+    lines.push(createSequence(i + settings.columns - 1, increments.SLASH));
     lines.push(createSequence(i, increments.BACKSLASH));
   });
 
@@ -39,12 +39,12 @@ function getValidSequences(squares) {
 }
 
 function validHorizontalStart(squares) {
-  const { COLUMNS } = settings;
+  const { columns } = settings;
   let validRows = [];
 
   for (let i = 0; i < squares.length; i++) {
-    const rowStart = Math.floor(i / COLUMNS);
-    const rowEnd = Math.floor((i + 2) / COLUMNS);
+    const rowStart = Math.floor(i / columns);
+    const rowEnd = Math.floor((i + 2) / columns);
     if (rowStart === rowEnd) {
       validRows.push(i);
     }
@@ -54,11 +54,11 @@ function validHorizontalStart(squares) {
 }
 
 function validVerticalStart(squares) {
-  const { COLUMNS, SEQ_LEN } = settings;
+  const { columns, seq_len } = settings;
   let validRows = [];
 
   for (let i = 0; i < squares.length; i++) {
-    const lastSquare = i + (SEQ_LEN - 1) * COLUMNS;
+    const lastSquare = i + (seq_len - 1) * columns;
     if (lastSquare < squares.length) {
       validRows.push(i);
     }
@@ -69,7 +69,7 @@ function validVerticalStart(squares) {
 
 function createSequence(start, increment) {
   let seq = [];
-  for (let i = 0; i < settings.SEQ_LEN; i++) {
+  for (let i = 0; i < settings.seq_len; i++) {
     const index = start + i * increment;
     seq.push(index);
   }

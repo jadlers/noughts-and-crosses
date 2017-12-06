@@ -2,9 +2,9 @@ import { calculateWinner } from "../helper";
 
 describe("Winner (3x3 seq=3)", () => {
   const settings = {
-    ROWS: 3,
-    COLUMNS: 3,
-    SEQ_LEN: 3
+    rows: 3,
+    columns: 3,
+    seq_len: 3
   };
 
   it("has no winner", () => {
@@ -40,9 +40,9 @@ describe("Winner (3x3 seq=3)", () => {
 
 describe("With (5x5 seq=3)", () => {
   const settings = {
-    ROWS: 5,
-    COLUMNS: 5,
-    SEQ_LEN: 3
+    rows: 5,
+    columns: 5,
+    seq_len: 3
   };
 
   it("has no winner", () => {

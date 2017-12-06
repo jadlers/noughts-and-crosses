@@ -16,7 +16,7 @@ export function calculateWinner(squares, boardConfig) {
 function getValidSequences(squares) {
   const horizontalStart = validHorizontalStart(squares);
   const verticalStart = validVerticalStart(squares);
-  const union = horizontalStart.filter(x => verticalStart.includes(x));
+  const intersection = horizontalStart.filter(x => verticalStart.includes(x));
   const increments = {
     HORIZONTAL: 1,
     VERTICAL: settings.columns,
@@ -30,7 +30,7 @@ function getValidSequences(squares) {
     lines.push(createSequence(i, increments.HORIZONTAL))
   );
   verticalStart.map(i => lines.push(createSequence(i, increments.VERTICAL)));
-  union.map(i => {
+  intersection.map(i => {
     lines.push(createSequence(i + settings.seq_len - 1, increments.SLASH));
     lines.push(createSequence(i, increments.BACKSLASH));
   });

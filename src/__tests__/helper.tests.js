@@ -129,7 +129,7 @@ describe("With (5x5 seq=3)", () => {
     // prettier-ignore
     const downLeft2upRight = [
       null, null, null, null, null,
-      null, "X", null, "X", null,
+      null, "X", null, null, "X",
       null, null, "X", "O", "O",
       null, "X", null, "O", null,
       null, null, "O", null, null

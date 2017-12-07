@@ -42,10 +42,14 @@ function getRow(index, columns) {
   return Math.floor(index / columns);
 }
 
+function zeroToNumArray(end) {
+  return Array.from(Array(end).keys());
+}
+
 function validHorizontalStart(squares) {
   const { columns, seq_len } = settings;
   const row = i => getRow(i, columns);
-  const indices = Array.from(Array(squares.length).keys());
+  const indices = zeroToNumArray(squares.length);
 
   return indices.filter(index => {
     const endIndex = index + seq_len - 1;

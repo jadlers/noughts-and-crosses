@@ -38,20 +38,19 @@ function getValidSequences(squares) {
   return lines;
 }
 
-function validHorizontalStart(squares) {
-  const { columns } = settings;
-  let validRows = [];
-
-  for (let i = 0; i < squares.length; i++) {
-    const rowStart = Math.floor(i / columns);
-    const rowEnd = Math.floor((i + 2) / columns);
-    if (rowStart === rowEnd) {
-      validRows.push(i);
-    }
-  }
-
 function getRow(index, columns) {
   return Math.floor(index / columns);
+}
+
+function validHorizontalStart(squares) {
+  const { columns, seq_len } = settings;
+  const row = i => getRow(i, columns);
+  const indices = Array.from(Array(squares.length).keys());
+
+  return indices.filter(index => {
+    const endIndex = index + seq_len - 1;
+    return row(index) === row(endIndex);
+  });
 }
 
 function validVerticalStart(squares) {

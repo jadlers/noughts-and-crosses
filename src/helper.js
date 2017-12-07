@@ -59,16 +59,12 @@ function validHorizontalStart(squares) {
 
 function validVerticalStart(squares) {
   const { columns, seq_len } = settings;
-  let validRows = [];
+  const indices = zeroToNumArray(squares.length);
 
-  for (let i = 0; i < squares.length; i++) {
+  return indices.filter(i => {
     const lastSquare = i + (seq_len - 1) * columns;
-    if (lastSquare < squares.length) {
-      validRows.push(i);
-    }
-  }
-
-  return validRows;
+    return lastSquare < squares.length;
+  });
 }
 
 function createSequence(start, increment) {

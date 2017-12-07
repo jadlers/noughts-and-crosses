@@ -50,7 +50,8 @@ function validHorizontalStart(squares) {
     }
   }
 
-  return validRows;
+function getRow(index, columns) {
+  return Math.floor(index / columns);
 }
 
 function validVerticalStart(squares) {

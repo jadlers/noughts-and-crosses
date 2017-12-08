@@ -4,7 +4,7 @@ let settings = {
   seq_len: 3
 };
 
-export function calculateWinner(squares, boardConfig) {
+export default function calculateWinner(squares, boardConfig) {
   settings = Object.assign({}, settings, boardConfig);
   const lines = getValidSequences(squares);
 

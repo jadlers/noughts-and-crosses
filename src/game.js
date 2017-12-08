@@ -1,6 +1,6 @@
 import React from "react";
 import Board from "./board";
-import { calculateWinner } from "./helper";
+import calculateWinner from "./calculateWinner.js";
 
 /* TODO: 1. Add a toggle button that lets you sort the moves in either ascending
 or descending order. */

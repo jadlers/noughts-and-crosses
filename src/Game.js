@@ -82,7 +82,7 @@ class Game extends React.Component {
           <span style={{ marginLeft: "20px", marginBottom: "10px" }}>
             {status}
           </span>
-          <GameHistory state={this.state} />
+          <GameHistory state={this.state} settings={this.settings} />
         </div>
       </div>
     );

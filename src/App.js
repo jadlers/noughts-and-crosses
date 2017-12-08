@@ -3,7 +3,13 @@ import Game from "./Game";
 
 class App extends React.Component {
   render() {
-    return <Game />;
+    const title = "Noughts & crosses";
+    return (
+      <div>
+        <h1>{title}</h1>
+        <Game />
+      </div>
+    );
   }
 }
 

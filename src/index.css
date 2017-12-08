@@ -26,7 +26,3 @@ ul {
   display: flex;
   flex-direction: row;
 }
-
-.bold {
-  font-weight: bold;
-}

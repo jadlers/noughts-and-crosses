@@ -55,32 +55,9 @@ class Game extends React.Component {
     });
   }
 
-  getCoordinates(i, width = 3) {
-    const col = i % width;
-    const row = Math.floor(i / width);
-    return "(" + col + ", " + row + ")";
-  }
-
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-
-    const moves = history.map((step, move) => {
-      const desc = move
-        ? "Go to move #" + move + " " + this.getCoordinates(step.updatedSquare)
-        : "Go to game start";
-
-      const lookedAt =
-        move === this.state.stepNumber ? { fontWeight: "bold" } : {};
-
-      return (
-        <li key={move}>
-          <button style={lookedAt} onClick={() => this.jumpTo(move)}>
-            {desc}
-          </button>
-        </li>
-      );
-    });
 
     const winner = calculateWinner(current.squares, this.settings);
     let status;
@@ -105,7 +82,7 @@ class Game extends React.Component {
           <span style={{ marginLeft: "20px", marginBottom: "10px" }}>
             {status}
           </span>
-          <GameHistory status={status} moves={moves} />
+          <GameHistory state={this.state} />
         </div>
       </div>
     );

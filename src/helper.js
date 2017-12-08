@@ -1,7 +1,11 @@
-let settings;
+let settings = {
+  rows: 3,
+  columns: 3,
+  seq_len: 3
+};
 
 export function calculateWinner(squares, boardConfig) {
-  settings = boardConfig;
+  settings = Object.assign({}, settings, boardConfig);
   const lines = getValidSequences(squares);
 
   for (let i = 0; i < lines.length; i++) {

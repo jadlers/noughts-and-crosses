@@ -101,7 +101,12 @@ class Game extends React.Component {
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <GameHistory status={status} moves={moves} />
+        <div>
+          <span style={{ marginLeft: "20px", marginBottom: "10px" }}>
+            {status}
+          </span>
+          <GameHistory status={status} moves={moves} />
+        </div>
       </div>
     );
   }

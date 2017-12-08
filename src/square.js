@@ -1,9 +1,29 @@
 import React from "react";
 
 function Square({ win, onClick, value }) {
-  const classes = win ? "square winning" : "square";
+  let style = {
+    background: "#fff",
+    border: "1px solid #999",
+    float: "left",
+    fontSize: "24px",
+    fontWeight: "bold",
+    lineHeight: "34px",
+    height: "34px",
+    width: "34px",
+    padding: 0,
+    marginRight: "-1px",
+    marginTop: "-1px",
+    textAlign: "center",
+    outline: "none",
+    borderRadius: 0
+  };
+
+  if (win) {
+    style = { ...style, background: "#85ff85" };
+  }
+
   return (
-    <button className={classes} onClick={onClick}>
+    <button style={style} onClick={onClick}>
       {value}
     </button>
   );

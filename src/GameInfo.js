@@ -3,8 +3,11 @@ import React from "react";
 class GameInfo extends React.Component {
   render() {
     const { status, moves } = this.props;
+    const style = {
+      marginLeft: "20px"
+    };
     return (
-      <div className="game-info">
+      <div style={style}>
         <div>{status}</div>
         <ol>{moves}</ol>
       </div>

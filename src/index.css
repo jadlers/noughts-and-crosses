@@ -27,10 +27,6 @@ ul {
   flex-direction: row;
 }
 
-.game-info {
-  margin-left: 20px;
-}
-
 .bold {
   font-weight: bold;
 }

@@ -28,18 +28,21 @@ function getValidSequences(squares) {
     BACKSLASH: settings.columns + 1
   };
 
-  let lines = [];
-
-  horizontalStart.map(i =>
-    lines.push(createSequence(i, increments.HORIZONTAL))
+  let lines = addLines(horizontalStart, increments.HORIZONTAL);
+  lines = lines.concat(addLines(verticalStart, increments.VERTICAL));
+  lines = lines.concat(addLines(intersection, increments.BACKSLASH));
+  lines = lines.concat(
+    addLines(intersection.map(i => i + settings.seq_len - 1), increments.SLASH)
   );
-  verticalStart.map(i => lines.push(createSequence(i, increments.VERTICAL)));
-  intersection.map(i => {
-    lines.push(createSequence(i + settings.seq_len - 1, increments.SLASH));
-    lines.push(createSequence(i, increments.BACKSLASH));
-  });
 
   return lines;
+}
+
+function addLines(indices, increment) {
+  const array = indices.map(i => {
+    return createSequence(i, increment);
+  });
+  return array;
 }
 
 function getRow(index, columns) {

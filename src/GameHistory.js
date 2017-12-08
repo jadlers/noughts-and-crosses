@@ -25,7 +25,7 @@ class GameHistory extends React.Component {
 
       return (
         <li key={move}>
-          <button style={lookedAt} onClick={() => this.jumpTo(move)}>
+          <button style={lookedAt} onClick={() => this.props.jumpTo(move)}>
             {desc}
           </button>
         </li>

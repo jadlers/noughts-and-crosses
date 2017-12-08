@@ -1,6 +1,6 @@
 import React from "react";
 
-class GameInfo extends React.Component {
+class GameHistory extends React.Component {
   render() {
     const { status, moves } = this.props;
     const style = {
@@ -15,4 +15,4 @@ class GameInfo extends React.Component {
   }
 }
 
-export default GameInfo;
+export default GameHistory;

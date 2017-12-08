@@ -1,6 +1,6 @@
 import React from "react";
 import Board from "./board";
-import GameInfo from "./GameInfo";
+import GameHistory from "./GameHistory";
 import calculateWinner from "./calculateWinner.js";
 
 /* TODO: 1. Add a toggle button that lets you sort the moves in either ascending
@@ -101,7 +101,7 @@ class Game extends React.Component {
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <GameInfo status={status} moves={moves} />
+        <GameHistory status={status} moves={moves} />
       </div>
     );
   }

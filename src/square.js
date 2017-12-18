@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 
 function Square({ win, onClick, value }) {
   let style = {
-    background: "#fff",
-    border: "1px solid #999",
-    float: "left",
-    fontSize: "24px",
-    fontWeight: "bold",
-    lineHeight: "34px",
-    height: "34px",
-    width: "34px",
+    background: '#fff',
+    border: '1px solid #999',
+    float: 'left',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    lineHeight: '34px',
+    height: '34px',
+    width: '34px',
     padding: 0,
-    marginRight: "-1px",
-    marginTop: "-1px",
-    textAlign: "center",
-    outline: "none",
-    borderRadius: 0
+    marginRight: '-1px',
+    marginTop: '-1px',
+    textAlign: 'center',
+    outline: 'none',
+    borderRadius: 0,
   };
 
   if (win) {
-    style = { ...style, background: "#85ff85" };
+    style = { ...style, background: '#85ff85' };
   }
 
   return (

@@ -1,7 +1,7 @@
 let settings = {
   rows: 3,
   columns: 3,
-  seq_len: 3
+  seq_len: 3,
 };
 
 export default function calculateWinner(squares, boardConfig) {
@@ -25,23 +25,19 @@ function getValidSequences(squares) {
     HORIZONTAL: 1,
     VERTICAL: settings.columns,
     SLASH: settings.columns - 1,
-    BACKSLASH: settings.columns + 1
+    BACKSLASH: settings.columns + 1,
   };
 
   let lines = addLines(horizontalStart, increments.HORIZONTAL);
   lines = lines.concat(addLines(verticalStart, increments.VERTICAL));
   lines = lines.concat(addLines(intersection, increments.BACKSLASH));
-  lines = lines.concat(
-    addLines(intersection.map(i => i + settings.seq_len - 1), increments.SLASH)
-  );
+  lines = lines.concat(addLines(intersection.map(i => i + settings.seq_len - 1), increments.SLASH));
 
   return lines;
 }
 
 function addLines(indices, increment) {
-  const array = indices.map(i => {
-    return createSequence(i, increment);
-  });
+  const array = indices.map(i => createSequence(i, increment));
   return array;
 }
 
@@ -58,7 +54,7 @@ function validHorizontalStart(squares) {
   const row = i => getRow(i, columns);
   const indices = zeroToNumArray(squares.length);
 
-  return indices.filter(index => {
+  return indices.filter((index) => {
     const endIndex = index + seq_len - 1;
     return row(index) === row(endIndex);
   });
@@ -68,14 +64,14 @@ function validVerticalStart(squares) {
   const { columns, seq_len } = settings;
   const indices = zeroToNumArray(squares.length);
 
-  return indices.filter(i => {
+  return indices.filter((i) => {
     const lastSquare = i + (seq_len - 1) * columns;
     return lastSquare < squares.length;
   });
 }
 
 function createSequence(start, increment) {
-  let seq = [];
+  const seq = [];
   for (let i = 0; i < settings.seq_len; i++) {
     const index = start + i * increment;
     seq.push(index);

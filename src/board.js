@@ -1,5 +1,5 @@
-import React from "react";
-import Square from "./square";
+import React from 'react';
+import Square from './square';
 
 class Board extends React.Component {
   renderSquare(i) {
@@ -22,7 +22,7 @@ class Board extends React.Component {
 
   createRow(startNum, columns) {
     const squares = [];
-    for (var i = 0; i < columns; i++) {
+    for (let i = 0; i < columns; i++) {
       squares.push(this.renderSquare(startNum++));
     }
     return (
@@ -35,7 +35,7 @@ class Board extends React.Component {
   render() {
     const { settings } = this.props;
     const rows = [];
-    for (var i = 0; i < settings.rows; i++) {
+    for (let i = 0; i < settings.rows; i++) {
       rows.push(this.createRow(i * settings.rows, settings.columns));
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Square({ win, onClick, value }) {
   let style = {
@@ -30,3 +31,9 @@ function Square({ win, onClick, value }) {
 }
 
 export default Square;
+
+Square.propTypes = {
+  win: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+};

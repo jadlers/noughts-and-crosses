@@ -1,7 +1,7 @@
 import React from 'react';
-import Board from './board';
+import Board from './Board';
 import GameHistory from './GameHistory';
-import calculateWinner from './calculateWinner.js';
+import calculateWinner from './calculateWinner';
 
 /* TODO: 1. Add a toggle button that lets you sort the moves in either ascending
 or descending order. */
@@ -56,7 +56,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const history = this.state.history;
+    const { history } = this.state;
     const current = history[this.state.stepNumber];
 
     const winner = calculateWinner(current.squares, this.settings);

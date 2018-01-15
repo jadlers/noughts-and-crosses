@@ -22,6 +22,8 @@
   "rules": {
     "react/jsx-filename-extension": 0,
     "max-len": ["error", { "code": 80 }],
-    "ignoreTrailingComments": true
+    "ignoreTrailingComments": true,
+    "jsx-a11y/anchor-is-valid": 0,
+    "trailing-comma": "always-multiline"
   }
 }

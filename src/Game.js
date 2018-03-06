@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import { shape, string } from 'prop-types';
 import Board from './Board';
 import GameHistory from './GameHistory';
 import calculateWinner from './calculateWinner';
@@ -7,6 +9,12 @@ import calculateWinner from './calculateWinner';
 or descending order. */
 
 class Game extends React.Component {
+  propTypes = {
+    match: shape({
+      path: string.isRequired,
+    }).isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.settings = {
@@ -56,6 +64,7 @@ class Game extends React.Component {
   }
 
   render() {
+    const { path } = this.props.match;
     const { history } = this.state;
     const current = history[this.state.stepNumber];
 
@@ -67,6 +76,14 @@ class Game extends React.Component {
     } else {
       status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     }
+
+    const gameHistory = () => (
+      <GameHistory
+        state={this.state}
+        settings={this.settings}
+        jumpTo={i => this.jumpTo(i)}
+      />
+    );
 
     return (
       <div className="game">
@@ -82,11 +99,7 @@ class Game extends React.Component {
           <span style={{ marginLeft: '20px', marginBottom: '10px' }}>
             {status}
           </span>
-          <GameHistory
-            state={this.state}
-            settings={this.settings}
-            jumpTo={i => this.jumpTo(i)}
-          />
+          <Route path={`${path}/history`} component={gameHistory} />
         </div>
       </div>
     );

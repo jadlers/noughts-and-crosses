@@ -30,10 +30,14 @@ function Square({ win, onClick, value }) {
   );
 }
 
-export default Square;
-
 Square.propTypes = {
   win: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string,
 };
+
+Square.defaultProps = {
+  value: null,
+};
+
+export default Square;

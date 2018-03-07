@@ -2,19 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class GameHistory extends React.Component {
-  propTypes = {
-    settings: PropTypes.shape({
-      columns: PropTypes.number.isRequired,
-      rows: PropTypes.number.isRequired,
-      seq_len: PropTypes.number.isRequired,
-    }).isRequired,
-    state: PropTypes.shape({
-      history: PropTypes.array.isRequired,
-      stepNumber: PropTypes.number.isRequired,
-    }).isRequired,
-    jumpTo: PropTypes.func.isRequired,
-  };
-
   getCoordinates(i) {
     const { columns } = this.props.settings;
     const col = i % columns;
@@ -57,5 +44,18 @@ class GameHistory extends React.Component {
     );
   }
 }
+
+GameHistory.propTypes = {
+  settings: PropTypes.shape({
+    columns: PropTypes.number.isRequired,
+    rows: PropTypes.number.isRequired,
+    seq_len: PropTypes.number.isRequired,
+  }).isRequired,
+  state: PropTypes.shape({
+    history: PropTypes.array.isRequired,
+    stepNumber: PropTypes.number.isRequired,
+  }).isRequired,
+  jumpTo: PropTypes.func.isRequired,
+};
 
 export default GameHistory;

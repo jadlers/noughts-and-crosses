@@ -9,12 +9,6 @@ import calculateWinner from './calculateWinner';
 or descending order. */
 
 class Game extends React.Component {
-  propTypes = {
-    match: shape({
-      path: string.isRequired,
-    }).isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.settings = {
@@ -105,5 +99,11 @@ class Game extends React.Component {
     );
   }
 }
+
+Game.propTypes = {
+  match: shape({
+    path: string.isRequired,
+  }).isRequired,
+};
 
 export default Game;

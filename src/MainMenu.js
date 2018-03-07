@@ -6,6 +6,9 @@ const MainMenu = () => (
     <Link to="/play">
       <li>Play</li>
     </Link>
+    <Link to="/settings">
+      <li>Settings</li>
+    </Link>
   </ul>
 );
 

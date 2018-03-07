@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { shape, string } from 'prop-types';
+import { shape, string, number } from 'prop-types';
 import Board from './Board';
 import GameHistory from './GameHistory';
 import calculateWinner from './calculateWinner';
@@ -11,16 +11,11 @@ or descending order. */
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.settings = {
-      rows: 5,
-      columns: 5,
-      seq_len: 3,
-    };
-    const numSquares = this.settings.rows * this.settings.columns;
+    const { rows, columns } = this.props.settings;
     this.state = {
       history: [
         {
-          squares: Array(numSquares).fill(null),
+          squares: Array(rows * columns).fill(null),
           updatedSquare: null,
         },
       ],
@@ -61,8 +56,9 @@ class Game extends React.Component {
     const { path } = this.props.match;
     const { history } = this.state;
     const current = history[this.state.stepNumber];
+    const { settings } = this.props;
 
-    const winner = calculateWinner(current.squares, this.settings);
+    const winner = calculateWinner(current.squares, settings);
     let status;
     if (winner) {
       const winnerChar = current.squares[winner[0]];
@@ -74,7 +70,7 @@ class Game extends React.Component {
     const gameHistory = () => (
       <GameHistory
         state={this.state}
-        settings={this.settings}
+        settings={settings}
         jumpTo={i => this.jumpTo(i)}
       />
     );
@@ -85,7 +81,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             winnerIndices={winner}
-            settings={this.settings}
+            settings={settings}
             onClick={i => this.handleClick(i)}
           />
         </div>
@@ -101,6 +97,11 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  settings: shape({
+    rows: number.isRequired,
+    columns: number.isRequired,
+    seq_len: number.isRequired,
+  }).isRequired,
   match: shape({
     path: string.isRequired,
   }).isRequired,

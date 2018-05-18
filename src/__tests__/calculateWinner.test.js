@@ -1,4 +1,4 @@
-import { calculateWinner } from '../helper';
+import calculateWinner from '../calculateWinner';
 
 describe('Winner (3x3 seq=3)', () => {
   const settings = {
